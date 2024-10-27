@@ -1,0 +1,12 @@
+spring:
+
+  config:
+    name: homelab-inventory
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  sql:
+    init:
+      schema-locations: classpath*:db/schema.sql
