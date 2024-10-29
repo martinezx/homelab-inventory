@@ -16,6 +16,7 @@ import org.xmdf.homelabinventory.model.DeviceModelAssembler;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/devices")
@@ -51,7 +52,7 @@ public class DeviceController {
     }
 
     @GetMapping("/{requestedId}")
-    public ResponseEntity<DeviceModel> findById(@PathVariable Long requestedId) {
+    public ResponseEntity<DeviceModel> findById(@PathVariable UUID requestedId) {
         Optional<Device> device = deviceRepository.findById(requestedId);
         DeviceModel deviceModel = device.map(deviceModelAssembler::toModel).orElse(null);
 
@@ -77,7 +78,7 @@ public class DeviceController {
     }
 
     @PutMapping("/{requestedId}")
-    private ResponseEntity<Void> putDevice(@PathVariable Long requestedId, @RequestBody Device deviceUpdate) {
+    private ResponseEntity<Void> putDevice(@PathVariable UUID requestedId, @RequestBody Device deviceUpdate) {
         boolean deviceExists = deviceRepository.existsById(requestedId);
 
         if (!deviceExists) {
@@ -90,7 +91,7 @@ public class DeviceController {
     }
 
     @DeleteMapping("/{id}")
-    private ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
+    private ResponseEntity<Void> deleteDevice(@PathVariable UUID id) {
         if (deviceRepository.existsById(id)) {
             deviceRepository.deleteById(id);
             return ResponseEntity.noContent().build();
