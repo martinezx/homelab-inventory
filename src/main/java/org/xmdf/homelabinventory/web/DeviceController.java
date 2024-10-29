@@ -7,15 +7,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.xmdf.homelabinventory.domain.Device;
 import org.xmdf.homelabinventory.domain.DeviceRepository;
 import org.xmdf.homelabinventory.model.DeviceModel;
 import org.xmdf.homelabinventory.model.DeviceModelAssembler;
 
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -59,5 +58,43 @@ public class DeviceController {
         return deviceModel != null
                 ? ResponseEntity.ok(deviceModel)
                 : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> createDevice(@RequestBody Device newDeviceRequest, UriComponentsBuilder ucb) {
+        Device device = Device.builder()
+                .name(newDeviceRequest.getName())
+                .brand(newDeviceRequest.getBrand())
+                .build();
+        Device savedDevice = deviceRepository.save(device);
+
+        URI locationOfNewDevice = ucb
+                .path("devices/{id}")
+                .buildAndExpand(savedDevice.getId())
+                .toUri();
+
+        return ResponseEntity.created(locationOfNewDevice).build();
+    }
+
+    @PutMapping("/{requestedId}")
+    private ResponseEntity<Void> putDevice(@PathVariable Long requestedId, @RequestBody Device deviceUpdate) {
+        boolean deviceExists = deviceRepository.existsById(requestedId);
+
+        if (!deviceExists) {
+            return ResponseEntity.notFound().build();
+        }
+
+        deviceUpdate.setId(requestedId);
+        deviceRepository.save(deviceUpdate);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Void> deleteDevice(@PathVariable Long id) {
+        if (deviceRepository.existsById(id)) {
+            deviceRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
