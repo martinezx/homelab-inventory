@@ -1,14 +1,26 @@
 CREATE TABLE IF NOT EXISTS hi_user (
-     ID         UUID DEFAULT UUID() PRIMARY KEY,
-     FIRST_NAME VARCHAR(256) NOT NULL,
-     LAST_NAME  VARCHAR(256) NOT NULL,
-     EMAIL      VARCHAR(256) NOT NULL,
-     PASSWORD   VARCHAR(256) NOT NULL,
-     ROLE       VARCHAR(256) NOT NULL
+    id         uuid DEFAULT UUID() PRIMARY KEY,
+    first_name varchar(256) NOT NULL,
+    last_name  varchar(256) NOT NULL,
+    email      varchar(256) NOT NULL UNIQUE,
+    password   varchar(256) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS hi_role (
+    id      uuid DEFAULT UUID() PRIMARY KEY,
+    name    varchar(256)
+);
+
+CREATE TABLE IF NOT EXISTS hi_user_role (
+    user_id    uuid,
+    role_id    uuid,
+    CONSTRAINT  fk_user_role_user FOREIGN KEY (user_id) REFERENCES hi_user (id),
+    CONSTRAINT  fk_user_role_role FOREIGN KEY (role_id) REFERENCES hi_role (id),
+    PRIMARY KEY(role_id, user_id)
 );
 
 CREATE TABLE IF NOT EXISTS hi_device (
-    ID      UUID DEFAULT UUID() PRIMARY KEY,
-    NAME    VARCHAR(256) NOT NULL,
-    BRAND   VARCHAR(256) NOT NULL
+    id      uuid DEFAULT UUID() PRIMARY KEY,
+    name    varchar(256) NOT NULL,
+    brand   varchar(256) NOT NULL
 );
