@@ -1,6 +1,7 @@
 package org.xmdf.homelabinventory.model;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.xmdf.homelabinventory.domain.Device;
 import org.xmdf.homelabinventory.web.DeviceController;
@@ -13,7 +14,7 @@ public class DeviceModelAssembler extends RepresentationModelAssemblerSupport<De
     }
 
     @Override
-    public DeviceModel toModel(Device entity) {
+    public DeviceModel toModel(@NonNull Device entity) {
         DeviceModel model = createModelWithId(entity.getId(), entity);
         model.setId(entity.getId());
         model.setName(entity.getName());

@@ -1,12 +1,15 @@
-spring:
+application:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      token-duration: ${JWT_TOKEN_DURATION}
 
+spring:
   config:
     name: homelab-inventory
-
   jpa:
     hibernate:
       ddl-auto: none
-
   sql:
     init:
       schema-locations: classpath*:db/schema.sql

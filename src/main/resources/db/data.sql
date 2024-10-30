@@ -1,3 +1,5 @@
+INSERT INTO hi_user(ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, ROLE) VALUES ('4f162c22-065d-4726-bf53-603a9c5c4d06', 'Jane', 'Doe', 'jane.doe@xmdf.live', '$2a$10$0HP.FlC2DUveTIWB3qTPo.hw.dbiRL694BxTruwCYSQG0x6rrNN5S', 'ADMIN');
+INSERT INTO hi_user(ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, ROLE) VALUES ('2b2f5cfb-5749-4f56-8768-142ea7875e46', 'John', 'Doe', 'john.doe@xmdf.live', '$2a$10$0HP.FlC2DUveTIWB3qTPo.hw.dbiRL694BxTruwCYSQG0x6rrNN5S', 'USER');
 INSERT INTO hi_device(NAME, BRAND) VALUES ('Light 1', 'Philips');
 INSERT INTO hi_device(NAME, BRAND) VALUES ('Light 2', 'Aqara');
 INSERT INTO hi_device(NAME, BRAND) VALUES ('Light 3', 'NanoLeaf');

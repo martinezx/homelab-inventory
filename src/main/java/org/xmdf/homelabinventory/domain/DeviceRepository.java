@@ -1,9 +1,8 @@
 package org.xmdf.homelabinventory.domain;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface DeviceRepository extends CrudRepository<Device, UUID>, PagingAndSortingRepository<Device, UUID> {
+public interface DeviceRepository extends JpaRepository<Device, UUID> {
 }
