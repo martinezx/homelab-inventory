@@ -1,10 +1,10 @@
-package org.xmdf.homelabinventory.model;
+package org.xmdf.homelabinventory.web.model;
 
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.xmdf.homelabinventory.domain.Device;
-import org.xmdf.homelabinventory.web.DeviceController;
+import org.xmdf.homelabinventory.web.controller.DeviceController;
 
 @Component
 public class DeviceModelAssembler extends RepresentationModelAssemblerSupport<Device, DeviceModel> {

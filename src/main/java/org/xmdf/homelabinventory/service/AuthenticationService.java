@@ -7,10 +7,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.xmdf.homelabinventory.domain.User;
-import org.xmdf.homelabinventory.domain.UserRepository;
-import org.xmdf.homelabinventory.model.AuthenticationRequest;
-import org.xmdf.homelabinventory.model.AuthenticationResponse;
-import org.xmdf.homelabinventory.model.RegisterRequest;
+import org.xmdf.homelabinventory.exception.UserAlreadyExistsException;
+import org.xmdf.homelabinventory.repository.UserRepository;
+import org.xmdf.homelabinventory.web.model.AuthenticationRequest;
+import org.xmdf.homelabinventory.web.model.AuthenticationResponse;
+import org.xmdf.homelabinventory.web.model.RegisterRequest;
 
 import java.util.List;
 
@@ -25,6 +26,11 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         var role = userRepository.findRoleByName("USER").orElseThrow();
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new UserAlreadyExistsException("Invalid email");
+        }
+
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())

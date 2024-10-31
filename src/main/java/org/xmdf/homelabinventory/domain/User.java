@@ -1,9 +1,6 @@
 package org.xmdf.homelabinventory.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,19 +23,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotEmpty
-    @Size(min = 3)
     private String firstName;
-
-    @Size(min = 3)
     private String lastName;
-
-    @Email
-    @NotEmpty
     private String email;
-
-    @NotEmpty
-    @Size(min = 8)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

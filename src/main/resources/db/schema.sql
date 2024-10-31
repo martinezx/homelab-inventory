@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS hi_user (
     id         uuid DEFAULT UUID() PRIMARY KEY,
-    first_name varchar(256) NOT NULL,
-    last_name  varchar(256) NOT NULL,
-    email      varchar(256) NOT NULL UNIQUE,
-    password   varchar(256) NOT NULL
+    first_name varchar(60) NOT NULL,
+    last_name  varchar(60) NOT NULL,
+    email      varchar(90) NOT NULL UNIQUE,
+    password   varchar(60) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS hi_role (

@@ -1,4 +1,4 @@
-package org.xmdf.homelabinventory.web;
+package org.xmdf.homelabinventory.web.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.xmdf.homelabinventory.domain.Device;
-import org.xmdf.homelabinventory.domain.DeviceRepository;
-import org.xmdf.homelabinventory.model.DeviceModel;
-import org.xmdf.homelabinventory.model.DeviceModelAssembler;
+import org.xmdf.homelabinventory.repository.DeviceRepository;
+import org.xmdf.homelabinventory.web.model.DeviceModel;
+import org.xmdf.homelabinventory.web.model.DeviceModelAssembler;
 
 import java.net.URI;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package org.xmdf.homelabinventory.model;
+package org.xmdf.homelabinventory.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
